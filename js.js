@@ -114,8 +114,10 @@ function carregaListaDados(){  ///carregaListaDasos() esta no body de consulta.h
 	
 	let listandoTodosDados = document.getElementById('listandoTodosDados') //aqui eu estou trazeno o id de tbody em pg consulta
 	
-	listaDados.forEach(function(d) {
-	console.log(d)
+	listandoTodosDados.innerHTML =''
+
+	filtros.forEach(function(d) {
+	//console.log(d)
 
 	let linha = listandoTodosDados.insertRow()
 
