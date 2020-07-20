@@ -103,7 +103,6 @@ class Bd{ // a *class Bd* representa o banco de dados que é o objeto que sera l
 		let filtro = Array() //criardo uma variavel e atribuindo um array que vai reseber os dados vindo de recuperarListaDados()
 		filtro = this.recuperarListaDados() //filtra recebe os dados de recuperarListaDados()
 
-		console.log(filtro)
 		if(lista.ano != ''){
 		filtro = filtro.filter(d => d.ano == lista.ano) //no metito de call muita atensao
 		}
@@ -135,23 +134,23 @@ function carregaListaDados(){  ///carregaListaDasos() esta no body de consulta.h
 	
 	listaDados = bd.recuperarListaDados() 
 	bd.recuperarListaDados() ///chamando a variavel *bd* com o operador *.* e criaro metudo "recuperarListaDados()" dentro da  class, do objeto *Bd*, e *Bd*  foi *bd* intanciado no escopo global  
-	// //console.log(listaDados)
+	//console.log(listaDados)
 	
-	// let listandoTodosDados = document.getElementById('listandoTodosDados') //aqui eu estou trazeno o id de tbody em pg consulta
+	let listandoTodosDados = document.getElementById('listandoTodosDados') //aqui eu estou trazeno o id de tbody em pg consulta
 	
-	// listaDados.forEach(function(d) {
-	// //console.log(d)
+	listaDados.forEach(function(d) {
+	//console.log(d)
 
-	// let linha = listandoTodosDados.insertRow()
+	let linha = listandoTodosDados.insertRow()
 
-	// 	linha.insertCell(0).innerHTML = d.idarq
-	// 	linha.insertCell(1).innerHTML = d.ano
-	// 	linha.insertCell(2).innerHTML = d.mes
-	// 	linha.insertCell(3).innerHTML = d.dia
-	// 	linha.insertCell(4).innerHTML = d.tipoarq
-	// 	linha.insertCell(5).innerHTML = d.descri
-	// 	linha.insertCell(6).innerHTML = d.arquivo
-	//  })
+		linha.insertCell(0).innerHTML = d.idarq
+		linha.insertCell(1).innerHTML = d.ano
+		linha.insertCell(2).innerHTML = d.mes
+		linha.insertCell(3).innerHTML = d.dia
+		linha.insertCell(4).innerHTML = d.tipoarq
+		linha.insertCell(5).innerHTML = d.descri
+		linha.insertCell(6).innerHTML = d.arquivo
+	 })
 }
 
 function pesquisarArquivos(){
@@ -168,7 +167,7 @@ function pesquisarArquivos(){
 	
 	let filtros = bd.consultar(dados)
 
-	let listandoTodosDados = document.getElementById('listandoTodosDados') //aqui eu estou trazeno o id de tbody em pg consulta
+	
 	
 	listandoTodosDados.innerHTML =''
 
