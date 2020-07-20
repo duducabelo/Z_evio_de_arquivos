@@ -1,8 +1,8 @@
 
 
 class Dados{ // usando o metudo construtor criar um ojbeto literau no qual eu posso tratar
-	constructor(ano, mes, dia, tipoarq, descri, idarq, arquivo)
-	{this.ano = ano, this.mes = mes, this.dia = dia, this.tipoarq = tipoarq, this.descri = descri, this.idarq = idarq, this.arquivo = arquivo}
+	constructor(ano, mes, dia, tipoarq, descri,  arquivo)
+	{this.ano = ano, this.mes = mes, this.dia = dia, this.tipoarq = tipoarq, this.descri = descri,  this.arquivo = arquivo}
 
 	campoVasil(){ // verifica sao de campo vasil 
 		for (let i in this) {
@@ -21,10 +21,10 @@ function enviar(){ //esta funçao tem o objetivo de, atraves od *id* dos element
 	let dia = document.getElementById('dia')
 	let tipoarq = document.getElementById('tipoarq')
 	let descri = document.getElementById('descri')
-	let idarq = document.getElementById('idarq')
+
 	let arquivo = document.getElementById('arquivo')
 	//criando a variavel *dados* onde o construtor vai me trazer o objeto pronto para ser tratado, agora *Dados* que ven do contrutor* passao a ser a variavel *dados*  
-	let dados = new Dados(ano.value, mes.value, dia.value, tipoarq.value, descri.value, idarq.value, arquivo.value)
+	let dados = new Dados(ano.value, mes.value, dia.value, tipoarq.value, descri.value,  arquivo.value)
 
 	if (dados.campoVasil()) { //if para dar um alerta de prenchimento do campos
 		
@@ -92,7 +92,7 @@ class Bd{ // a *class Bd* representa o banco de dados que é o objeto que sera l
 			if (listaDado == null) { /// pulaar o array que estiver vsil
 					continue
 			}
-
+			listaDado.id = i
 			listaDados.push( listaDado) /// con o metudo push para coloca dento do Array "push pega o objeto e insere no Array"
 		}		
 		return listaDados
@@ -122,8 +122,13 @@ class Bd{ // a *class Bd* representa o banco de dados que é o objeto que sera l
 		filtro = filtro.filter(d => d.arquivo == lista.arquivo)
 		}
 		return filtro
-	 }	
+	 }
+
+	 excluir(id){
+	 	localStorage.removeItem(id)
+	 }
 }
+
 let bd = new Bd() //fazerndo a instancia da *class Bd* que agora é *bd*
 
 ////////////estraindo dados de localStorag do proprio navegador e indo para pg cunsulta////////////////////
@@ -143,13 +148,25 @@ function carregaListaDados(){  ///carregaListaDasos() esta no body de consulta.h
 
 	let linha = listandoTodosDados.insertRow()
 
-		linha.insertCell(0).innerHTML = d.idarq
+		linha.insertCell(0).innerHTML = d.id
 		linha.insertCell(1).innerHTML = d.ano
 		linha.insertCell(2).innerHTML = d.mes
 		linha.insertCell(3).innerHTML = d.dia
 		linha.insertCell(4).innerHTML = d.tipoarq
 		linha.insertCell(5).innerHTML = d.descri
 		linha.insertCell(6).innerHTML = d.arquivo
+
+		let remover = document.createElement("buttom") 
+		remover.className = 'btn btn-danger' 
+		remover.innerHTML = '<i class="far fa-trash-alt"></i>'
+		remover.id = d.id
+		remover.onclick = function(){
+			
+			bd.excluir(this.id)
+			window.location.reload()
+		}
+		linha.insertCell(7).append(remover)
+		
 	 })
 }
 
@@ -160,10 +177,9 @@ function pesquisarArquivos(){
 	let dia = document.getElementById('dia').value
 	let tipoarq = document.getElementById('tipoarq').value
 	let descri = document.getElementById('descri').value
-	let idarq = document.getElementById('idarq').value
 	let arquivo = document.getElementById('arquivo').value
 	//criando a variavel *dados* onde o construtor vai me trazer o objeto pronto para ser tratado, agora *Dados* que ven do contrutor* passao a ser a variavel *dados*  
-	let dados = new Dados(ano, mes, dia, tipoarq, descri, idarq, arquivo)
+	let dados = new Dados(ano, mes, dia, tipoarq, descri, arquivo)
 	
 	let filtros = bd.consultar(dados)
 
@@ -176,7 +192,7 @@ function pesquisarArquivos(){
 
 	let linha = listandoTodosDados.insertRow()
 
-		linha.insertCell(0).innerHTML = d.idarq
+		linha.insertCell(0).innerHTML = d.id
 		linha.insertCell(1).innerHTML = d.ano
 		linha.insertCell(2).innerHTML = d.mes
 		linha.insertCell(3).innerHTML = d.dia
