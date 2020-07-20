@@ -126,8 +126,5 @@ function carregaListaDados(){  ///carregaListaDasos() esta no body de consulta.h
 		linha.insertCell(4).innerHTML = d.tipoarq
 		linha.insertCell(5).innerHTML = d.descri
 		linha.insertCell(6).innerHTML = d.arquivo
-	
-
-		
 	 })
 }
