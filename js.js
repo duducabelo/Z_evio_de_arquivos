@@ -76,9 +76,58 @@ class Bd{ // a *class Bd* representa o banco de dados que é o objeto que sera l
 		localStorage.setItem(id, JSON.stringify(d)) //localStorage.setItem e um local do proprio navegador, entao aqui o meu objeto literal agora que é *d* para a ser uma string "texto"  ataves do metudo JSON 
 		
 		localStorage.setItem('id', id)
+		
 		}
+		
+	recuperarListaDados(){ //faz parte da pa consulta.html
+		
+		let listaDados = Array() ///aplicando um Array para cada indice 
+		
+		let id = localStorage.getItem('id') ///pegando o 'id de localStorage que é uma string devido a JSON.String' e com a variadel *id* trago a string para objeto literal
+
+		for (let i = 1; i <= id; i++) { ///estrutura de loop que me trases o indice dos abjetos que ainda estao como string 
+
+			let listaDado = JSON.parse(localStorage.getItem(i)) ///tasendo o indice agora como objeto literal ,,JSON.parse()
+
+			if (listaDado == null) { /// pulaar o array que estiver vsil
+					continue
+			}
+
+			listaDados.push(listaDado) /// con o metudo push para coloca dento do Array "push pega o objeto e insere no Array"
+		};
+		
+		return listaDados
+
+	}	
 }
 let bd = new Bd() //fazerndo a instancia da *class Bd* que agora é *bd*
 
+////////////estraindo dados de localStorag do proprio navegador e indo para pg cunsulta////////////////////
 
+function carregaListaDados(){  ///carregaListaDasos() esta no body de consulta.html onload "onload chame o script para ser executado"
+	
+	let listaDados = Array() ///variavel que da um Array a listaDados agora um Array ja tratados "sem indice vasil null"
+	
+	listaDados = bd.recuperarListaDados() 
+	//bd.recuperarListaDados() ///chamando a variavel *bd* com o operador *.* e criaro metudo "recuperarListaDados()" dentro da  class, do objeto *Bd*, e *Bd*  foi *bd* intanciado no escopo global  
+	console.log(listaDados)
+	
+	let listandoTodosDados = document.getElementById('listandoTodosDados') //aqui eu estou trazeno o id de tbody em pg consulta
+	
+	listaDados.forEach(function(d) {
+	console.log(d)
 
+	let linha = listandoTodosDados.insertRow()
+
+		linha.insertCell(0).innerHTML = d.idarq
+		linha.insertCell(1).innerHTML = d.ano
+		linha.insertCell(2).innerHTML = d.mes
+		linha.insertCell(3).innerHTML = d.dia
+		linha.insertCell(4).innerHTML = d.tipoarq
+		linha.insertCell(5).innerHTML = d.descri
+		linha.insertCell(6).innerHTML = d.arquivo
+	
+
+		
+	 })
+}
