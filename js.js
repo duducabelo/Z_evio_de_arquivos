@@ -93,12 +93,37 @@ class Bd{ // a *class Bd* representa o banco de dados que é o objeto que sera l
 					continue
 			}
 
-			listaDados.push(listaDado) /// con o metudo push para coloca dento do Array "push pega o objeto e insere no Array"
-		};
-		
+			listaDados.push( listaDado) /// con o metudo push para coloca dento do Array "push pega o objeto e insere no Array"
+		}		
 		return listaDados
+	}
 
-	}	
+	consultar(lista){
+		
+		let filtro = Array() //criardo uma variavel e atribuindo um array que vai reseber os dados vindo de recuperarListaDados()
+		filtro = this.recuperarListaDados() //filtra recebe os dados de recuperarListaDados()
+
+		console.log(filtro)
+		if(lista.ano != ''){
+		filtro = filtro.filter(d => d.ano == lista.ano) //no metito de call muita atensao
+		}
+		if(lista.mes != ''){
+		filtro = filtro.filter(d => d.mes == lista.mes)
+		}
+		if(lista.dia != ''){
+		filtro = filtro.filter(d => d.dia == lista.dia)
+		}
+		if(lista.tipoarq != ''){
+		filtro = filtro.filter(d => d.tipoarq == lista.tipoarq)
+		}
+		if(lista.descri != ''){
+		filtro = filtro.filter(d => d.descri == lista.descri)
+		}
+		if(lista.arquivo != ''){
+		filtro = filtro.filter(d => d.arquivo == lista.arquivo)
+		}
+		return filtro
+	 }	
 }
 let bd = new Bd() //fazerndo a instancia da *class Bd* que agora é *bd*
 
@@ -109,9 +134,40 @@ function carregaListaDados(){  ///carregaListaDasos() esta no body de consulta.h
 	let listaDados = Array() ///variavel que da um Array a listaDados agora um Array ja tratados "sem indice vasil null"
 	
 	listaDados = bd.recuperarListaDados() 
-	//bd.recuperarListaDados() ///chamando a variavel *bd* com o operador *.* e criaro metudo "recuperarListaDados()" dentro da  class, do objeto *Bd*, e *Bd*  foi *bd* intanciado no escopo global  
-	console.log(listaDados)
+	bd.recuperarListaDados() ///chamando a variavel *bd* com o operador *.* e criaro metudo "recuperarListaDados()" dentro da  class, do objeto *Bd*, e *Bd*  foi *bd* intanciado no escopo global  
+	// //console.log(listaDados)
 	
+	// let listandoTodosDados = document.getElementById('listandoTodosDados') //aqui eu estou trazeno o id de tbody em pg consulta
+	
+	// listaDados.forEach(function(d) {
+	// //console.log(d)
+
+	// let linha = listandoTodosDados.insertRow()
+
+	// 	linha.insertCell(0).innerHTML = d.idarq
+	// 	linha.insertCell(1).innerHTML = d.ano
+	// 	linha.insertCell(2).innerHTML = d.mes
+	// 	linha.insertCell(3).innerHTML = d.dia
+	// 	linha.insertCell(4).innerHTML = d.tipoarq
+	// 	linha.insertCell(5).innerHTML = d.descri
+	// 	linha.insertCell(6).innerHTML = d.arquivo
+	//  })
+}
+
+function pesquisarArquivos(){
+	
+	let ano = document.getElementById('ano').value
+	let mes = document.getElementById('mes').value
+	let dia = document.getElementById('dia').value
+	let tipoarq = document.getElementById('tipoarq').value
+	let descri = document.getElementById('descri').value
+	let idarq = document.getElementById('idarq').value
+	let arquivo = document.getElementById('arquivo').value
+	//criando a variavel *dados* onde o construtor vai me trazer o objeto pronto para ser tratado, agora *Dados* que ven do contrutor* passao a ser a variavel *dados*  
+	let dados = new Dados(ano, mes, dia, tipoarq, descri, idarq, arquivo)
+	
+	let filtros = bd.consultar(dados)
+
 	let listandoTodosDados = document.getElementById('listandoTodosDados') //aqui eu estou trazeno o id de tbody em pg consulta
 	
 	listandoTodosDados.innerHTML =''
