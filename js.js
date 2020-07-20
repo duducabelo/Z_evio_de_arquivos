@@ -4,7 +4,7 @@ class Dados{ // usando o metudo construtor criar um ojbeto literau no qual eu po
 	constructor(ano, mes, dia, tipoarq, descri, idarq, arquivo)
 	{this.ano = ano, this.mes = mes, this.dia = dia, this.tipoarq = tipoarq, this.descri = descri, this.idarq = idarq, this.arquivo = arquivo}
 
-	campoVasil(){ // verifica sao de campos vasilos 
+	campoVasil(){ // verifica sao de campo vasil 
 		for (let i in this) {
 			if (this[i] == undefined || this[i] == '' || this[i] == null) {
 				return false
@@ -55,7 +55,7 @@ function enviar(){ //esta funçao tem o objetivo de, atraves od *id* dos element
 
 ////////// 'construtor gera ID = 0', 'oproximoId() faz incremento de +1 ID' e 'gravar(d) faz o processo de gravaçao'//////////
 
-class Bd{ // a *class Bd* representa o banco de dados que é o obleto que sera localStorage do proprio navegador "pais eu nao sei usar o banco de dados" 
+class Bd{ // a *class Bd* representa o banco de dados que é o objeto que sera localStorage do proprio navegador "pais eu nao sei usar o banco de dados" 
 	
 	constructor(){
 		let id =localStorage.getItem('id')
@@ -67,7 +67,7 @@ class Bd{ // a *class Bd* representa o banco de dados que é o obleto que sera l
 
 	oproximoId()	{
 		let proximoId = localStorage.getItem('id')
-		return parseInt(proximoId) + 1 // porra preta atençao con o *int* nao é -iten- eu te entendo , os vizinhos são um bando de filhos da puta que só sabem bater na parede e fasez barulho, FILHOS DA PUTA, EU VOU MATALOS A SIM QUE POSSÍVEL. para tudo tem a hora certa ok voolte para o projeto blz fuma um cigarro ok
+		return parseInt(proximoId) + 1 // porra presta atençao con o *int* nao é -iten- eu te entendo , os vizinhos são um bando de filhos da puta que só sabem bater na parede e fasez barulho, FILHOS DA PUTA, EU VOU MATALOS A SIM QUE POSSÍVEL. para tudo tem a hora certa ok voolte para o projeto blz fuma um cigarro ok
 	}
 	
 	gravar(d) { // *gravar vai receber um novo parametro a letra *d* 
